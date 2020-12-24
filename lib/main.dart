@@ -10,8 +10,9 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(routes: {
-      '/':(context) => LoginScreen()
-    },);
+    return MaterialApp(
+      theme: ThemeData(primaryColor: Color(0xff1875F0)),
+      routes: {'/': (context) => LoginScreen()},
+    );
   }
 }
