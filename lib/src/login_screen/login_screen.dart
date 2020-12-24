@@ -41,27 +41,32 @@ class LoginScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
                         Container(
-                            padding: EdgeInsets.symmetric(vertical: 10),
-                            child: Row(
-                              children: <Widget>[
-                                Container(
-                                  margin: EdgeInsets.only(right: 15),
-                                  width: 50,
-                                  height: 50,
-                                  child: Center(
-                                      child: SvgPicture.asset(
-                                    'assets/images/svg/user.svg',
-                                    color: Colors.white,
-                                    width: 20,
-                                    height: 20,
-                                  )),
-                                  decoration: BoxDecoration(
-                                      color: Color(0x401875F0),
-                                      shape: BoxShape.circle),
-                                ),
-                                Text('tee_api@hotmail.com', style: textStyle02),
-                              ],
-                            )),
+                          padding: EdgeInsets.symmetric(vertical: 10),
+                          child: Row(
+                            children: <Widget>[
+                              Container(
+                                margin: EdgeInsets.only(right: 15),
+                                width: 50,
+                                height: 50,
+                                child: Center(
+                                    child: SvgPicture.asset(
+                                  'assets/images/svg/user.svg',
+                                  color: Colors.white,
+                                  width: 20,
+                                  height: 20,
+                                )),
+                                decoration: BoxDecoration(
+                                    color: Color(0x401875F0),
+                                    shape: BoxShape.circle),
+                              ),
+                              Text('tee_api@hotmail.com', style: textStyle02),
+                            ],
+                          ),
+                          decoration: BoxDecoration(
+                              border: Border(
+                                  bottom: BorderSide(
+                                      color: Color(0xffDEDEDE), width: 1))),
+                        ),
                         Container(
                             padding: EdgeInsets.symmetric(vertical: 10),
                             child: Row(
@@ -83,7 +88,11 @@ class LoginScreen extends StatelessWidget {
                                 ),
                                 Text('apisit.a@avlgb.com', style: textStyle02),
                               ],
-                            )),
+                            ),
+                            decoration: BoxDecoration(
+                                border: Border(
+                                    bottom: BorderSide(
+                                        color: Color(0xffDEDEDE), width: 1)))),
                       ],
                     ),
                   ),
