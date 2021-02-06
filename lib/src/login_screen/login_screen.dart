@@ -1,6 +1,9 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:space_one/src/model/user_info.dart';
 
 class LoginScreen extends StatelessWidget {
   TextStyle textStyle01 = TextStyle(
@@ -40,34 +43,15 @@ class LoginScreen extends StatelessWidget {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
-                        Container(
-                          padding: EdgeInsets.symmetric(vertical: 10),
-                          child: Row(
-                            children: <Widget>[
-                              Container(
-                                margin: EdgeInsets.only(right: 15),
-                                width: 50,
-                                height: 50,
-                                child: Center(
-                                    child: SvgPicture.asset(
-                                  'assets/images/svg/user.svg',
-                                  color: Colors.white,
-                                  width: 20,
-                                  height: 20,
-                                )),
-                                decoration: BoxDecoration(
-                                    color: Color(0x401875F0),
-                                    shape: BoxShape.circle),
-                              ),
-                              Text('tee_api@hotmail.com', style: textStyle02),
-                            ],
-                          ),
-                          decoration: BoxDecoration(
-                              border: Border(
-                                  bottom: BorderSide(
-                                      color: Color(0xffDEDEDE), width: 1))),
-                        ),
-                        Container(
+                        GestureDetector(
+                          onTap: () {
+                            print("Login with user tee_api@hotmail.com");
+                            UserInfo userInfo = new UserInfo();
+                            userInfo.name = "tee_api@hotmail.com";
+                            Navigator.pushNamed(context, "/first_page",
+                                arguments: userInfo);
+                          },
+                          child: Container(
                             padding: EdgeInsets.symmetric(vertical: 10),
                             child: Row(
                               children: <Widget>[
@@ -86,13 +70,52 @@ class LoginScreen extends StatelessWidget {
                                       color: Color(0x401875F0),
                                       shape: BoxShape.circle),
                                 ),
-                                Text('apisit.a@avlgb.com', style: textStyle02),
+                                Text('tee_api@hotmail.com', style: textStyle02),
                               ],
                             ),
                             decoration: BoxDecoration(
                                 border: Border(
                                     bottom: BorderSide(
-                                        color: Color(0xffDEDEDE), width: 1)))),
+                                        color: Color(0xffDEDEDE), width: 1))),
+                          ),
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            print("Login with user apisit.a@avlgb.com");
+                            UserInfo userInfo = new UserInfo();
+                            userInfo.name = "apisit.a@avlgb.com";
+                            Navigator.pushNamed(context, "/first_page",
+                                arguments: userInfo);
+                          },
+                          child: Container(
+                              padding: EdgeInsets.symmetric(vertical: 10),
+                              child: Row(
+                                children: <Widget>[
+                                  Container(
+                                    margin: EdgeInsets.only(right: 15),
+                                    width: 50,
+                                    height: 50,
+                                    child: Center(
+                                        child: SvgPicture.asset(
+                                      'assets/images/svg/user.svg',
+                                      color: Colors.white,
+                                      width: 20,
+                                      height: 20,
+                                    )),
+                                    decoration: BoxDecoration(
+                                        color: Color(0x401875F0),
+                                        shape: BoxShape.circle),
+                                  ),
+                                  Text('apisit.a@avlgb.com',
+                                      style: textStyle02),
+                                ],
+                              ),
+                              decoration: BoxDecoration(
+                                  border: Border(
+                                      bottom: BorderSide(
+                                          color: Color(0xffDEDEDE),
+                                          width: 1)))),
+                        )
                       ],
                     ),
                   ),
