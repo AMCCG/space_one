@@ -1,9 +1,10 @@
-import 'dart:math';
+import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:space_one/src/model/user_info.dart';
+import 'package:http/http.dart' as http;
 
 class LoginScreen extends StatelessWidget {
   TextStyle textStyle01 = TextStyle(
@@ -16,6 +17,23 @@ class LoginScreen extends StatelessWidget {
       fontSize: 14,
       color: const Color(0xff707070),
       decoration: TextDecoration.none);
+
+  Future<UserInfo> fetchData(String email) async {
+    Map body = {'email': email};
+    var url = 'http://10.0.2.2:8888/signin';
+    final response = await http.post(url,
+        headers: {"Content-Type": "application/json"}, body: json.encode(body));
+    print("Response from python ${response.statusCode}");
+    print("Response from python ${response.body}");
+    // return json.decode(response.body);
+    return UserInfo.fromJson(jsonDecode(response.body));
+  }
+
+  navigate(context, email) async {
+    UserInfo data = await this.fetchData(email);
+    print("Login with user ${data}");
+    Navigator.pushNamed(context, "/first_page", arguments: data);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -44,13 +62,7 @@ class LoginScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
                         GestureDetector(
-                          onTap: () {
-                            print("Login with user tee_api@hotmail.com");
-                            UserInfo userInfo = new UserInfo();
-                            userInfo.name = "tee_api@hotmail.com";
-                            Navigator.pushNamed(context, "/first_page",
-                                arguments: userInfo);
-                          },
+                          onTap: () => navigate(context, 'tee_api@hotmail.com'),
                           child: Container(
                             padding: EdgeInsets.symmetric(vertical: 10),
                             child: Row(
@@ -80,13 +92,7 @@ class LoginScreen extends StatelessWidget {
                           ),
                         ),
                         GestureDetector(
-                          onTap: () {
-                            print("Login with user apisit.a@avlgb.com");
-                            UserInfo userInfo = new UserInfo();
-                            userInfo.name = "apisit.a@avlgb.com";
-                            Navigator.pushNamed(context, "/first_page",
-                                arguments: userInfo);
-                          },
+                          onTap: () => navigate(context, 'apisit.am@avlgb.com'),
                           child: Container(
                               padding: EdgeInsets.symmetric(vertical: 10),
                               child: Row(

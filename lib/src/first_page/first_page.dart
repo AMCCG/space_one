@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:space_one/src/model/user_info.dart';
 
@@ -14,11 +16,34 @@ class _FirstPageState extends State<FirstPage> {
     UserInfo user = ModalRoute.of(context).settings.arguments;
     return Scaffold(
       appBar: AppBar(
+        title: GestureDetector(
+          onTap: () {
+            print("Tap");
+          },
+          child: Row(
+            children: [
+              Text(
+                'Feed',
+                style: TextStyle(color: Colors.black),
+              ),
+              Icon(
+                Icons.keyboard_arrow_down_sharp,
+                color: Colors.black,
+              )
+            ],
+          ),
+        ),
         backgroundColor: Colors.white,
         iconTheme: IconThemeData(color: Colors.blue),
         actions: <Widget>[
           IconButton(
-            icon: Icon(Icons.search),
+            icon: Icon(Icons.filter_list, color: Colors.black),
+            onPressed: () {
+              print("Filter");
+            },
+          ),
+          IconButton(
+            icon: Icon(Icons.search, color: Colors.black),
             onPressed: () {
               print("search");
             },
@@ -33,17 +58,24 @@ class _FirstPageState extends State<FirstPage> {
               Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
-                  Image(
-                    image: AssetImage("assets/images/icon/group_space.png"),
-                    height: 50,
+                  Container(
                     width: 50,
+                    height: 50,
+                    child: CircleAvatar(
+                        radius: 25,
+                        backgroundColor: Colors.transparent,
+                        backgroundImage: ResizeImage(
+                            MemoryImage(Base64Decoder()
+                                .convert(user.image.split(',').last)),
+                            width: 50,
+                            height: 50)),
                   ),
                   SizedBox(width: 10),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Text(
-                        "${user.name}",
+                        "${user.username}",
                         style: TextStyle(
                             fontSize: 16, fontWeight: FontWeight.bold),
                       ),
@@ -74,7 +106,7 @@ class _FirstPageState extends State<FirstPage> {
       ),
       body: Container(
         padding: EdgeInsets.all(10),
-        child: Text("Hello ${user.name}"),
+        child: Text("Hello ${user.username}"),
       ),
       bottomNavigationBar: BottomNavigationBar(
         selectedItemColor: Colors.blue,
